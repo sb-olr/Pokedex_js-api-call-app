@@ -6,8 +6,10 @@ pokemonList.push({name: 'Ivysaur', height: 1, type: ['grass', 'poison']});
 
 pokemonList.push({name: 'Venusaur', height: 2, type: ['grass', 'poison']});
 
-for (let poke of pokemonList) {
+pokemonList.forEach( poke => {
     const {name, height} = poke;
     const extra = height>=7 ? '<br>Ginormous!!!' : '';
-    document.write(`<div class="pokemon"> ${name} (height: ${height})${extra}</div>`);
-}
+    const text = `<div class="pokemon"> ${name} (height: ${height})${extra}</div>`;
+    console.debug(text);
+    document.write(text);
+})
