@@ -9,12 +9,16 @@ const pokemanRepository = (() => {
         }
     }
 
+    const get = name => {
+        return pokemonList.filter(pokeman => pokeman.name === name);
+    }
     const getAll = () => {
         return pokemonList;
     }
 
     return {
         add,
+        get,
         getAll
     };
 })();
@@ -25,6 +29,7 @@ pokemanRepository.add({name: 'Bulbasaur', height: 7, type: ['grass', 'poison']})
 pokemanRepository.add({name: 'Ivysaur', height: 1, type: ['grass', 'poison']});
 pokemanRepository.add({name: 'Venusaur', height: 2, type: ['grass', 'poison']});
 pokemanRepository.add({test: 'test', name: 'Testasaur', height: 2, type: ['grass', 'poison']});
+pokemanRepository.add({test: 'test', name: 'Testasaur2', type: ['grass', 'poison']});
 pokemanRepository.add(1);
 pokemanRepository.add(true);
 pokemanRepository.add(false);
@@ -38,3 +43,5 @@ pokemanRepository.getAll().forEach( pokemon => {
     console.debug(text);
     document.write(text);
 })
+
+console.debug(pokemanRepository.get('Testasaur'))
