@@ -36,5 +36,5 @@ pokemanRepository.getAll().forEach( pokemon => {
     const extra = height>=7 ? '<br>Ginormous!!!' : '';
     const text = `<div class="pokemon"> ${name} (height: ${height})${extra}</div>`;
     console.debug(text);
-    // document.write(text);
+    document.write(text);
 })
