@@ -9,17 +9,33 @@ const pokemanRepository = (() => {
         }
     }
 
-    const get = name => {
-        return pokemonList.filter(pokeman => pokeman.name === name);
-    }
-    const getAll = () => {
-        return pokemonList;
-    }
+    const get = name => pokemonList.filter(pokeman => pokeman.name === name);
 
+    const getAll = () => pokemonList;
+    
+    const showDetails = pokemon => console.log(pokemon);
+
+    const addClickListener = (button, pokemon) => button.addEventListener('click', ()=>showDetails(pokemon));
+
+    const addListItem = pokemon => {
+        let pokemonList = document.querySelector('.pokemon-list');
+
+        let listItem = document.createElement('li');
+        let button = document.createElement('button');
+    
+        button.innerText = pokemon.name;
+        button.classList.add('pokemon-button');
+        addClickListener(button, pokemon);
+    
+        listItem.appendChild(button);
+        pokemonList.appendChild(listItem);
+    }
+    
     return {
         add,
         get,
-        getAll
+        getAll,
+        addListItem
     };
 })();
 
@@ -36,12 +52,6 @@ pokemanRepository.add(false);
 pokemanRepository.add('test');
 
 
-pokemanRepository.getAll().forEach( pokemon => {
-    const {name, height} = pokemon;
-    const extra = height>=7 ? '<br>Ginormous!!!' : '';
-    const text = `<div class="pokemon"> ${name} (height: ${height})${extra}</div>`;
-    console.debug(text);
-    document.write(text);
-})
+pokemanRepository.getAll().forEach( pokemon => pokemanRepository.addListItem(pokemon))
 
 console.debug(pokemanRepository.get('Testasaur'))
