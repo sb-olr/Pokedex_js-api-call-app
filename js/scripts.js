@@ -1,7 +1,8 @@
-const neededKeys=['name', 'height', 'type'];
+const neededKeys=['name', 'detailsUrl'];
 
-const pokemanRepository = (() => {
+const pokemonRepository = (() => {
     const pokemonList = [];
+    const apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
     const add = pokeman => {
         if (validKeys(pokeman)){
@@ -13,7 +14,11 @@ const pokemanRepository = (() => {
 
     const getAll = () => pokemonList;
     
-    const showDetails = pokemon => console.log(pokemon);
+    const showDetails = pokemon => {
+        loadDetails(pokemon).then(function () {
+          console.log(pokemon);
+        });
+      }
 
     const addClickListener = (button, pokemon) => button.addEventListener('click', ()=>showDetails(pokemon));
 
@@ -31,27 +36,46 @@ const pokemanRepository = (() => {
         pokemonList.appendChild(listItem);
     }
     
+    const loadList = () => {
+        return fetch(apiUrl).then(response => {
+            console.log("fetch done")
+          return response.json();
+        }).then(json => {
+          json.results.forEach(item => {
+            let pokemon  = {
+              name: item.name,
+              detailsUrl: item.url
+            };
+            add(pokemon);
+          });
+        }).catch(e => console.error(e));
+    }
+
+    const loadDetails = item => {
+        let url = item.detailsUrl;
+        return fetch(url).then(response => {
+          return response.json();
+        }).then(details => {
+          item.imageUrl = details.sprites.front_default;
+          item.height = details.height;
+          item.types = details.types;
+        }).catch(e => console.error(e));
+    }
+
     return {
         add,
         get,
         getAll,
-        addListItem
+        addListItem,
+        loadList,
+        loadDetails,
     };
 })();
 
-const validKeys = obj => (typeof(obj)=='object') && (neededKeys.every(key => Object.keys(obj).includes(key)))
+const validKeys = obj => (typeof(obj)=='object') && (neededKeys.every(key => Object.keys(obj).includes(key)));
 
-pokemanRepository.add({name: 'Bulbasaur', height: 7, type: ['grass', 'poison']});
-pokemanRepository.add({name: 'Ivysaur', height: 1, type: ['grass', 'poison']});
-pokemanRepository.add({name: 'Venusaur', height: 2, type: ['grass', 'poison']});
-pokemanRepository.add({test: 'test', name: 'Testasaur', height: 2, type: ['grass', 'poison']});
-pokemanRepository.add({test: 'test', name: 'Testasaur2', type: ['grass', 'poison']});
-pokemanRepository.add(1);
-pokemanRepository.add(true);
-pokemanRepository.add(false);
-pokemanRepository.add('test');
+pokemonRepository.loadList().then(() => {
+    pokemonRepository.getAll().forEach( pokemon => pokemonRepository.addListItem(pokemon));
+})
 
-
-pokemanRepository.getAll().forEach( pokemon => pokemanRepository.addListItem(pokemon))
-
-console.debug(pokemanRepository.get('Testasaur'))
+console.debug(pokemonRepository.get('Testasaur'));
