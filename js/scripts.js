@@ -4,21 +4,11 @@ const pokemonRepository = (() => {
     const pokemonList = [];
     const apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
-    const add = pokeman => {
-        if (validKeys(pokeman)){
-            pokemonList.push(pokeman);
-        }
-    }
-
-    const get = name => pokemonList.filter(pokeman => pokeman.name === name);
+    const add = pokemon => validKeys(pokemon) && pokemonList.push(pokemon);
 
     const getAll = () => pokemonList;
     
-    const showDetails = pokemon => {
-        loadDetails(pokemon).then(function () {
-          console.log(pokemon);
-        });
-      }
+    const showDetails = pokemon => loadDetails(pokemon).then(console.log(pokemon));
 
     const addClickListener = (button, pokemon) => button.addEventListener('click', ()=>showDetails(pokemon));
 
@@ -63,19 +53,14 @@ const pokemonRepository = (() => {
     }
 
     return {
-        add,
-        get,
         getAll,
         addListItem,
         loadList,
-        loadDetails,
     };
 })();
 
 const validKeys = obj => (typeof(obj)=='object') && (neededKeys.every(key => Object.keys(obj).includes(key)));
 
 pokemonRepository.loadList().then(() => {
-    pokemonRepository.getAll().forEach( pokemon => pokemonRepository.addListItem(pokemon));
-})
-
-console.debug(pokemonRepository.get('Testasaur'));
+    pokemonRepository.getAll().forEach(pokemon => pokemonRepository.addListItem(pokemon));
+});
