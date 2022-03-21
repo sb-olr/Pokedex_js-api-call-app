@@ -11,3 +11,11 @@
 .pokemon-button{
         background-color: pink; /* Green */
 }
+
+#loading-message{
+        display: none;
+}
+
+#loading-message.show{
+        display: block;
+}

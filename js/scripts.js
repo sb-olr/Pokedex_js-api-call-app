@@ -27,18 +27,24 @@ const pokemonRepository = (() => {
     }
     
     const loadList = () => {
+        showLoadingMessage();
         return fetch(apiUrl).then(response => {
-            console.log("fetch done")
+            // timeout is for demo only as the message disappears too fast!
+            setTimeout(hideLoadingMessage, 2000);
+            console.log("fetch done");
           return response.json();
         }).then(json => {
           json.results.forEach(item => {
             let pokemon  = {
               name: item.name,
               detailsUrl: item.url
-            };
+            }
             add(pokemon);
           });
-        }).catch(e => console.error(e));
+        }).catch(e => {
+            hideLoadingMessage();
+            console.error(e)
+        });
     }
 
     const loadDetails = item => {
@@ -60,6 +66,18 @@ const pokemonRepository = (() => {
 })();
 
 const validKeys = obj => (typeof(obj)=='object') && (neededKeys.every(key => Object.keys(obj).includes(key)));
+
+// show a helpful message while waiting for results
+const showLoadingMessage = () => {
+    let loading = document.querySelector('#loading-message');
+    loading.classList.add('show');
+  }
+
+// hide message after results arrive
+const hideLoadingMessage = () => {
+    let loading = document.querySelector('#loading-message');
+    loading.classList.remove('show');
+  }
 
 pokemonRepository.loadList().then(() => {
     pokemonRepository.getAll().forEach(pokemon => pokemonRepository.addListItem(pokemon));
