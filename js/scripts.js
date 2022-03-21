@@ -56,7 +56,7 @@ const pokemonRepository = (() => {
         getAll,
         addListItem,
         loadList,
-    };
+    }
 })();
 
 const validKeys = obj => (typeof(obj)=='object') && (neededKeys.every(key => Object.keys(obj).includes(key)));
