@@ -69,13 +69,13 @@ const validKeys = obj => (typeof(obj)=='object') && (neededKeys.every(key => Obj
 
 // show a helpful message while waiting for results
 const showLoadingMessage = () => {
-    let loading = document.querySelector('#loading-message');
+    const loading = document.querySelector('#loading-message');
     loading.classList.add('show');
   }
 
 // hide message after results arrive
 const hideLoadingMessage = () => {
-    let loading = document.querySelector('#loading-message');
+    const loading = document.querySelector('#loading-message');
     loading.classList.remove('show');
   }
 
