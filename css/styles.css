@@ -64,7 +64,11 @@
         border: 0;
         background: none;
         color: #777;
-        text-decoration: underline;
+        text-decoration: none;
+}
+
+.modal-close:hover {
+        color: black;
 }
 
 .modal h1 {
