@@ -75,7 +75,7 @@ const pokemonRepository = (() => {
         .map((type) => {
           return type.type.name;
         })
-        .join(" ");
+        .join(", ");
     }
 
     let modalContainer = document.querySelector("#modal-container");
@@ -98,10 +98,10 @@ const pokemonRepository = (() => {
     modalTitle.innerText = name;
 
     let modalTextHeight = document.createElement("p");
-    modalTextHeight.innerText = height;
+    modalTextHeight.innerText = `height: ${height}`;
 
     let modalTextTypes = document.createElement("p");
-    modalTextTypes.innerText = typeNames;
+    modalTextTypes.innerText = `type: ${typeNames}`;
 
     let modalImage = document.createElement("img");
     modalImage.src = imageUrl;
