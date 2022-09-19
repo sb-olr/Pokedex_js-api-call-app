@@ -2,7 +2,8 @@ const neededKeys = ["name", "detailsUrl"];
 
 const pokemonRepository = (() => {
   const pokemonList = [];
-  const apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
+  const apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=10"; //for dev - quicker reloads
+  // const apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
 
   const add = (pokemon) => validKeys(pokemon) && pokemonList.push(pokemon);
 
@@ -21,10 +22,12 @@ const pokemonRepository = (() => {
     let pokemonList = document.querySelector(".pokemon-list");
 
     let listItem = document.createElement("li");
+    listItem.classList.add("row", "list-group-item", "justify-content-center", "mb2");
+
     let button = document.createElement("button");
 
     button.innerText = pokemon.name;
-    button.classList.add("pokemon-button");
+    button.classList.add("btn", "btn-primary", "list-group-item", "list-group-item-action", "list-group-item-light");
     addClickListener(button, pokemon);
 
     listItem.appendChild(button);

@@ -13,17 +13,18 @@
   <body>
     <header>
       <div class="header">
-      <img src="img/pokemon.jpeg" alt="pokemon" id="pokemon">
+      <img src="img/pokemon-logo.png" alt="pokemon-logo" id="pokemon-logo">
       <h1 class="logo">Pokedex</h1>
       <h2 class="title">gotta catch 'em all</h2>
         </div>
     </header>
-    <h6 id="loading-message">Loading...</h6>
+    <main class="container-fluid">
+      <h6 id="loading-message">Loading...</h6>
+      <div id="modal-container"></div>
+      <ul class="pokemon-list list-group"></ul>
 
-    <div id="modal-container"></div>
-
-    <ul class="pokemon-list"></ul>
-
+    </main>
+    
     <script src="js/polyfill.min.js"></script>
     <script src="js/fetch.umd.js"></script>
     <script src="js/scripts.js"></script>
