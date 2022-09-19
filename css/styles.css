@@ -88,3 +88,8 @@ position: relative;
     background-repeat:   no-repeat;
     background-size:     cover;
 }
+
+.logo {
+        font-family: "pokemon-solid", sans-serif;
+        font-size: "xx-large";
+}
