@@ -25,14 +25,15 @@ const pokemonRepository = (() => {
 
     let button = document.createElement("button");
     button.setAttribute("data-toggle", "modal");
-    button.setAttribute("data-target", "#pokemonModal" + pokemon.name);
+    button.setAttribute("data-target", ".modal");
     button.innerText = pokemon.name;
     button.classList.add("btn-outline-success", "btn-lg", "group-list-item");
 
-    addClickListener(button, pokemon);
-
+    
     listItem.appendChild(button);
     pokemonList.appendChild(listItem);
+
+    addClickListener(button, pokemon);
   };
 
   const loadList = () => {
