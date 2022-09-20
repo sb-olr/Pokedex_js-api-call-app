@@ -93,3 +93,22 @@ position: relative;
         font-family: "pokemon-solid", sans-serif;
         font-size: "xx-large";
 }
+
+.list-group {
+  margin-top: 60px;
+}
+
+.group-list-item {
+  list-style: none;
+}
+
+.btn-lg {
+  width: 340px;
+  margin-top: 12px;
+  transition: 0.7s opacity;
+}
+
+.btn-lg:hover {
+  background-color: darkgreen;
+  opacity: 90%;
+}
