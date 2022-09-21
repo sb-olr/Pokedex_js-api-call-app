@@ -1,5 +1,4 @@
 const neededKeys = ["name", "detailsUrl"];
-
 const pokemonRepository = (() => {
   const pokemonList = [];
   const apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
@@ -10,29 +9,8 @@ const pokemonRepository = (() => {
 
   const showDetails = (pokemon) => {
     loadDetails(pokemon).then(() => {
-      console.log(pokemon);
       showModal(pokemon);
     });
-  };
-  const addClickListener = (button, pokemon) =>
-    button.addEventListener("click", () => showDetails(pokemon));
-
-  const addListItem = (pokemon) => {
-    let pokemonList = document.querySelector(".pokemon-list");
-
-    let listItem = document.createElement("li");
-    listItem.classList.add("group-list-item");
-
-    let button = document.createElement("button");
-    button.setAttribute("data-toggle", "modal");
-    button.setAttribute("data-target", "#pokemonModal" + pokemon.name);
-    button.innerText = pokemon.name;
-    button.classList.add("btn-outline-success", "btn-lg", "group-list-item");
-
-    addClickListener(button, pokemon);
-
-    listItem.appendChild(button);
-    pokemonList.appendChild(listItem);
   };
 
   const loadList = () => {
@@ -66,10 +44,31 @@ const pokemonRepository = (() => {
       .then((details) => {
         item.imageUrl = details.sprites.front_default;
         item.height = details.height;
+        item.weight = details.weight;
         item.types = details.types;
       })
       .catch((e) => console.error(e));
   };
+
+  function addListItem(pokemon) {
+    let myList = document.querySelector(".list-group");
+
+    let listItem = document.createElement("li");
+    let button = document.createElement("button");
+
+    button.innerText = pokemon.name;
+    button.classList.add("btn", "btn-outline-success", "item");
+    button.setAttribute("data-toggle", "modal");
+    button.setAttribute("data-target", "#exampleModal");
+
+    listItem.appendChild(button);
+
+    myList.appendChild(listItem);
+
+    button.addEventListener("click", function (event) {
+      showDetails(pokemon); //event handler
+    });
+  }
 
   function showModal(pokemon) {
     let modalTitle = $(".modal-title");
@@ -83,10 +82,12 @@ const pokemonRepository = (() => {
     );
     let pokemonDetails = $('<p class="modal-title"></p>');
 
-    pokemonDetails.append(`${
+    pokemonDetails.append(`<em>Name:</em> ${
       pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)
-    }, and its height is: ${pokemon.height} with weight
-    of: ${pokemon.weight}. Lets GO!!`);
+    }<br> 
+    <em>Height:</em> ${pokemon.height}<br>
+    <em>Weight:</em> ${pokemon.weight}<br>
+     Lets GO!!`);
     modalBody.append(pokemonDetails);
     let pokemonImage = $('<img class="modal-img">').attr(
       "src",
