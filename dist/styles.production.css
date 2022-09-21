@@ -1,0 +1,38 @@
+#loading-message {
+  display: none;
+}
+
+#loading-message.show {
+  display: block;
+}
+
+.list-group {
+  margin: 60px;
+  list-style-type: none;
+}
+
+.item {
+  width: 400px;
+  margin-top: 12px;
+  transition: 0.7s opacity;
+}
+
+.item:hover {
+  background-color: darkgreen;
+  opacity: 90%;
+}
+
+.logo {
+        font-family: "pokemon-solid", sans-serif;
+        font-size: "xx-large";
+}
+
+#pokemon-logo {
+  position: relative;
+  float: left;
+  width:  100px;
+  height: 100px;
+  background-position: 50% 50%;
+  background-repeat:   no-repeat;
+  background-size:     cover;
+}
